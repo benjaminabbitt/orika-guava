@@ -1,5 +1,8 @@
 *.class
 
+.idea/*
+.gradle/*
+
 # Package Files #
 *.jar
 *.war

@@ -17,14 +17,14 @@ public class OptionalTest {
 
 
     @Before
-    public void before(){
-        MapperFactory factory =  new DefaultMapperFactory.Builder().mapNulls(true).build();
+    public void before() {
+        MapperFactory factory = new DefaultMapperFactory.Builder().mapNulls(true).build();
         factory = GuavaOrikaConverter.getInstance().registerConverters(factory);
         facade = factory.getMapperFacade();
     }
 
     @Test
-    public void testAToB(){
+    public void testAToB() {
         String value = "foo";
         A a = new A(value);
         B b = facade.map(a, B.class);
@@ -32,14 +32,16 @@ public class OptionalTest {
     }
 
     @Ignore(value = "Test fails due to possible bug in Orika.")
-    @Test public void TestAToBNull(){
+    @Test
+    public void testAToBNull() {
         String value = null;
         A a = new A(value);
         B b = facade.map(a, B.class);
         assertEquals(b, new B(Optional.<String>absent()));
     }
 
-    @Test public void TestBtoA(){
+    @Test
+    public void testBtoA() {
         String value = "foo";
         B b = new B(Optional.of(value));
         A a = facade.map(b, A.class);
@@ -48,7 +50,8 @@ public class OptionalTest {
 
 
     @Ignore(value = "Test fails due to possible bug in Orika.")
-    @Test public void testBtoANull(){
+    @Test
+    public void testBtoANull() {
         B b = new B(Optional.<String>absent());
         A a = facade.map(b, A.class);
         assertNull(a.getFoo());
